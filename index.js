@@ -1,16 +1,13 @@
-var rl = require('readline');
+var argv = require('optimist').argv,
+    $ = require('jquery'),
+    fs = require('fs');
 
-var prompts = rl.createInterface(process.stdin, process.stdout);
+var file = argv._[0];
 
-prompts.question("How many servings of fruits and vegetables do you eat each day",function(servings){
-    var message = '';
+var html = fs.readFileSync(file,'UTF-8');
 
-    if(servings < 5){
-        message = "Since you're only eating " + servings +
-        " right now, you might want to start eating " +  (5 - servings) + " more.";
-    }else{
-        message = "Excellent, your diet is on the right track";
-    }
-    console.log(message);
-    process.exit();
+$(html).find('p').each(function(index){
+    var content = $(this).html();
+
+    console.log('Paragraph ' +  (index + 1 ) +  ': ' + content);
 })
