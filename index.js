@@ -1,3 +1,5 @@
-var parser = require('node-markdown');
-var html = parser.Markdown('using **markdown** helps you focus on writing *not*');
-console.log(html);
+var argv = require('optimist').argv;
+console.log(argv);
+for(var i = 0; i < argv.times; i++){
+    console.log(argv._[0] + ' on loop number ' + (i + 1));
+}
